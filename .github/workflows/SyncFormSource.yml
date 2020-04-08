@@ -1,0 +1,22 @@
+# This is a basic workflow to help you get started with Actions
+
+name: SyncFormSource
+
+# Run Everyday
+on:
+  schedule:
+  - cron:  "0 0 * * *"
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@Sync
+    - name: repo-sync
+      uses: repo-sync/github-sync@v2
+      with:
+        source_repo: "git@github.com:ElderJames/ant-design-blazor.git"
+        source_branch: "master"
+        destination_branch: "master"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
